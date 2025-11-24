@@ -76,49 +76,53 @@ try {
     console.log("Fancybox yüklenmedi veya gerekmedi.");
 }
 
-// --- MOBİL MENÜ ÇALIŞTIRMA (GÜNCELLENDİ) ---
-document.addEventListener('DOMContentLoaded', () => {
+// --- MOBİL MENÜ ÇALIŞTIRMA (BASİT VE GARANTİLİ) ---
+(function() {
+    'use strict';
     
-    const menuBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    const menuIcon = menuBtn ? menuBtn.querySelector('i') : null;
-
-    // Tüm elementlerin varlığını kontrol et
-    if (menuBtn && navLinks && menuIcon) {
-        menuBtn.addEventListener('click', (e) => {
+    function initMobileMenu() {
+        const menuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (!menuBtn || !navLinks) {
+            console.warn('Mobil menü elementleri bulunamadı');
+            return;
+        }
+        
+        const menuIcon = menuBtn.querySelector('i');
+        
+        menuBtn.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
             
-            // 1. Menüyü aç/kapat
-            navLinks.classList.toggle('active');
+            console.log('Butona tıklandı!');
             
-            // 2. İkonu değiştir (Çizgi <-> Çarpı)
-            if (navLinks.classList.contains('active')) {
-                menuIcon.classList.remove('fa-bars');
-                menuIcon.classList.add('fa-times');
-                console.log("Menü AÇILDI"); // Test için
+            // Menüyü aç/kapat
+            navLinks.classList.toggle('mobile-menu-open');
+            
+            // İkonu değiştir
+            if (navLinks.classList.contains('mobile-menu-open')) {
+                if (menuIcon) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                }
+                console.log('Menü AÇILDI');
             } else {
-                menuIcon.classList.remove('fa-times');
-                menuIcon.classList.add('fa-bars');
-                console.log("Menü KAPANDI"); // Test için
-            }
-        });
-        
-        // Menü dışına tıklanınca kapat
-        document.addEventListener('click', (e) => {
-            if (navLinks.classList.contains('active')) {
-                if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
-                    navLinks.classList.remove('active');
+                if (menuIcon) {
                     menuIcon.classList.remove('fa-times');
                     menuIcon.classList.add('fa-bars');
                 }
+                console.log('Menü KAPANDI');
             }
         });
-    } else {
-        console.error("HATA: Mobil menü elementleri bulunamadı!", {
-            menuBtn: !!menuBtn,
-            navLinks: !!navLinks,
-            menuIcon: !!menuIcon
-        });
+        
+        console.log('Mobil menü hazır!');
     }
-});
+    
+    // Sayfa yüklendiğinde çalıştır
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initMobileMenu);
+    } else {
+        initMobileMenu();
+    }
+})();
