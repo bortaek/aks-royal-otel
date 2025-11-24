@@ -977,8 +977,10 @@ ul { list-style: none; }
 
 .image-wrapper img {
     width: 100%;
+    height: auto; /* Oranı koru */
     border-radius: 5px;
     box-shadow: 20px 20px 0px var(--secondary-color); /* Şık gölge efekti */
+    object-fit: cover; /* Resmin oranını koru */
 }
 
 /* --- ODA KARTLARI GRID --- */
