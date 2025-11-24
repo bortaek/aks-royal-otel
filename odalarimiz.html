@@ -267,5 +267,32 @@
     </div>
 
     <script src="script.js"></script>
+    
+    <!-- MOBİL MENÜ TEST - Eğer script.js çalışmazsa bu çalışır -->
+    <script>
+    // Acil durum mobil menü kodu
+    setTimeout(function() {
+        var btn = document.querySelector('.mobile-menu-btn');
+        var menu = document.querySelector('.nav-links');
+        if (btn && menu) {
+            console.log('ACİL DURUM: Mobil menü butonu bulundu');
+            btn.addEventListener('click', function() {
+                console.log('ACİL DURUM: Butona tıklandı!');
+                menu.classList.toggle('mobile-menu-open');
+                var icon = btn.querySelector('i');
+                if (icon) {
+                    if (menu.classList.contains('mobile-menu-open')) {
+                        icon.className = 'fas fa-times';
+                    } else {
+                        icon.className = 'fas fa-bars';
+                    }
+                }
+            });
+            console.log('ACİL DURUM: Mobil menü hazır!');
+        } else {
+            console.error('ACİL DURUM: Elementler bulunamadı!', {btn: !!btn, menu: !!menu});
+        }
+    }, 100);
+    </script>
 </body>
 </html>
