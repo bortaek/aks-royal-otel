@@ -76,26 +76,30 @@ try {
     console.log("Fancybox yüklenmedi veya gerekmedi.");
 }
 
-// --- MOBİL MENÜ (HAMBURGER) ÇALIŞTIRMA KODU ---
+// --- MOBİL MENÜ ÇALIŞTIRMA (GÜNCELLENDİ) ---
 document.addEventListener('DOMContentLoaded', () => {
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
     
-    // Eğer elementler sayfada varsa çalıştır
-    if (mobileBtn && navLinks) {
-        mobileBtn.addEventListener('click', () => {
-            // Menüye 'active' sınıfını ekle/çıkar (Toggle)
+    const menuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    const menuIcon = document.querySelector('.mobile-menu-btn i');
+
+    if (menuBtn) {
+        menuBtn.addEventListener('click', () => {
+            // 1. Menüyü aç/kapat
             navLinks.classList.toggle('active');
             
-            // İkonu değiştir (Çizgi <-> Çarpı)
-            const icon = mobileBtn.querySelector('i');
+            // 2. İkonu değiştir (Çizgi <-> Çarpı)
             if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times'); // Çarpı ikonu
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+                console.log("Menü AÇILDI"); // Test için
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars'); // Çizgi ikonu
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+                console.log("Menü KAPANDI"); // Test için
             }
         });
+    } else {
+        console.error("HATA: Mobil menü butonu HTML'de bulunamadı!");
     }
 });
