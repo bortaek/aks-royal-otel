@@ -75,3 +75,27 @@ try {
 } catch (e) {
     console.log("Fancybox yüklenmedi veya gerekmedi.");
 }
+
+// --- MOBİL MENÜ (HAMBURGER) ÇALIŞTIRMA KODU ---
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    // Eğer elementler sayfada varsa çalıştır
+    if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', () => {
+            // Menüye 'active' sınıfını ekle/çıkar (Toggle)
+            navLinks.classList.toggle('active');
+            
+            // İkonu değiştir (Çizgi <-> Çarpı)
+            const icon = mobileBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times'); // Çarpı ikonu
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars'); // Çizgi ikonu
+            }
+        });
+    }
+});

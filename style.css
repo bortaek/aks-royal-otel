@@ -2253,3 +2253,192 @@ blockquote {
         min-height: 400px;
     }
 }
+
+/* --- YENİ HERO (TAM RESİM) TASARIMI --- */
+.hero-wrapper {
+    position: relative; /* İçindekileri serbest bırakmak için */
+    width: 100%;
+    height: auto; /* Yükseklik resme göre otomatik ayarlansın */
+    overflow: hidden;
+    margin-top: 90px; /* Navbar'ın altında kalmasın diye boşluk (Navbar yüksekliği kadar) */
+}
+
+/* Gerçek Resim Ayarı */
+.hero-real-img {
+    width: 100%; /* Ekranı tam kapla */
+    height: auto; /* Orantıyı asla bozma */
+    display: block; /* Altında boşluk kalmasın */
+}
+
+/* Siyah Filtre Katmanı */
+.hero-overlay-layer {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+    z-index: 1;
+}
+
+/* Yazıların Konumu */
+.hero-content-layer {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); /* Tam merkeze kilitle */
+    z-index: 2;
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    color: white;
+}
+
+/* Mobilde Navbar boşluğunu azalt */
+@media (max-width: 768px) {
+    .hero-wrapper {
+        margin-top: 70px;
+    }
+}
+
+/* --- PREMİUM HERO ANİMASYON VE DÜZEN --- */
+
+/* 1. Ana Kapsayıcı (Sabit Yükseklik ve Merkezleme) */
+.hero-anim-section {
+    position: relative;
+    width: 100%;
+    /* Ekranın %85'i kadar yükseklik (Hem büyük hem de çok basık değil) */
+    height: 85vh; 
+    min-height: 650px; /* Mobilde çok kısalmasın */
+    overflow: hidden; /* Dışarı taşan animasyonu gizle */
+    display: flex;
+    align-items: center; /* Dikey ortalama */
+    justify-content: center; /* Yatay ortalama */
+    text-align: center;
+    color: white;
+    margin-top: 90px; /* Navbar boşluğu */
+}
+
+/* 2. Arka Plan Resmi ve ANİMASYON */
+.hero-bg-image {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-position: center center;
+    background-size: cover;
+    z-index: -2; /* En arkaya at */
+    
+    /* İŞTE ANİMASYON KODU (Ken Burns Efekti) */
+    /* 20 saniyede yavaşça büyür, sonra küçülür, sonsuza kadar tekrar eder */
+    animation: kenBurnsSlow 20s infinite alternate ease-in-out;
+}
+
+/* Animasyon Tanımı */
+@keyframes kenBurnsSlow {
+    0% { transform: scale(1); } /* Başlangıç: Normal boyut */
+    100% { transform: scale(1.15); } /* Bitiş: %15 Büyümüş hali */
+}
+
+/* 3. Siyah Filtre (Yazılar net görünsün diye) */
+.hero-overlay-layer {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Alttan yukarı kararan modern gradyan */
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.4) 100%);
+    z-index: -1;
+}
+
+/* 4. İçerik Düzeni */
+.hero-content-center {
+    z-index: 2;
+    max-width: 900px;
+    padding: 0 20px;
+}
+
+.hero-content-center h1 {
+    font-size: 3.5rem; /* Büyük başlık */
+    line-height: 1.3;
+    font-weight: 700;
+    margin-bottom: 25px;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Son satırı altın rengi yapalım */
+.highlight-text {
+    color: var(--secondary-color);
+}
+
+.hero-desc {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Beyaz çerçeveli buton için ek stil (Eğer kullanırsan) */
+.white-btn {
+    border-color: white !important;
+    color: white !important;
+}
+.white-btn:hover {
+    background: white !important;
+    color: var(--primary-color) !important;
+}
+
+/* Mobil Uyum */
+@media (max-width: 768px) {
+    .hero-anim-section {
+        height: 75vh; /* Mobilde biraz daha kısa */
+        margin-top: 70px;
+    }
+    .hero-content-center h1 {
+        font-size: 2.2rem; /* Mobilde başlığı küçült */
+    }
+    .hero-desc {
+        font-size: 1rem;
+    }
+}
+
+/* --- MOBİL MENÜ İÇİN GEREKLİ CSS --- */
+@media (max-width: 768px) {
+    /* Menü normalde gizli */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px; /* Navbar yüksekliği kadar aşağıdan başlasın */
+        right: -100%; /* Ekranın sağında gizli dursun */
+        width: 100%; /* Ekranı kaplasın (Veya %70) */
+        height: calc(100vh - 70px);
+        background: rgba(255, 255, 255, 0.98); /* Opak beyaz zemin */
+        backdrop-filter: blur(10px);
+        padding-top: 50px;
+        transition: right 0.4s ease-in-out; /* Kayma efekti */
+        z-index: 999;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    /* JavaScript 'active' sınıfı ekleyince burası çalışır */
+    .nav-links.active {
+        right: 0; /* Menüyü ekrana getir */
+    }
+
+    /* Linklerin Mobildeki Görünümü */
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 15px 0;
+    }
+
+    .nav-links li a {
+        font-size: 1.2rem; /* Mobilde daha büyük yazı */
+        display: block;
+        padding: 10px;
+    }
+    
+    /* Mobil Buton Görünür Olsun */
+    .mobile-menu-btn {
+        display: block !important;
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--primary-color);
+    }
+}
