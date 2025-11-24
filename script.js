@@ -29,3 +29,49 @@ window.addEventListener("scroll", reveal);
 
 // Sayfa ilk yüklendiğinde de bir kez kontrol et (Hero altı hemen görünüyorsa)
 reveal();
+// --- SWIPER KAYDIRICI GÜNCEL AYARLAR ---
+var swiper = new Swiper(".mySwiper", {
+    // Döngü (loop) kapalı olsun ki resimler birbirine girmesin
+    loop: false, 
+    
+    // Resimlerin ortalanması
+    centeredSlides: true,
+    
+    // Otomatik Oynatma (İstersen kapatabilirsin)
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+    },
+    
+    // Efekt: Fade yerine "slide" olsun, resimler kayarak geçsin (Daha stabil)
+    effect: 'slide',
+    
+    pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+    },
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
+    
+    // Resim yüklenince boyutu tekrar hesapla (Hata önleyici)
+    autoHeight: false, 
+    updateOnImagesReady: true
+});
+// --- FANCYBOX (LIGHTBOX) BAŞLATMA ---
+// Galeriyi çalıştır
+try {
+    Fancybox.bind("[data-fancybox]", {
+        // Galeri açıldığında sonsuz döngü olsun
+        loop: true,
+        // Zoom efektiyle açılsın
+        animationEffect: "zoom",
+        // Resimlerin altındaki yazıları göster
+        caption: function (fancybox, slide) {
+            return slide.caption || "";
+        },
+    });
+} catch (e) {
+    console.log("Fancybox yüklenmedi veya gerekmedi.");
+}
