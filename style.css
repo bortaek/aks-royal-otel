@@ -102,7 +102,7 @@ ul { list-style: none; }
     width: 100%; /* Üzerine gelince çizgi uzar */
 }
 
-.mobile-menu-btn { display: none; font-size: 1.5rem; cursor: pointer; }
+/* .mobile-menu-btn - Mobil menü CSS'i en altta */
 
 /* --- LUXURY HERO SECTION (HIGH-END DESIGN) --- */
 .hero-luxury {
@@ -2379,7 +2379,7 @@ blockquote {
 }
 
 /* =========================================
-   MOBİL MENÜ - KESİN ÇÖZÜM
+   MOBİL MENÜ - EN BASİT VE GARANTİLİ ÇÖZÜM
 ========================================= */
 
 /* Masaüstünde hamburger butonunu gizle */
@@ -2387,32 +2387,34 @@ blockquote {
     display: none;
 }
 
-/* Mobilde (768px ve altı) */
-@media (max-width: 768px) {
+/* Mobilde (768px ve altı) - EN SON ÇALIŞACAK KOD */
+@media screen and (max-width: 768px) {
     
-    /* Hamburger butonunu göster */
-    .mobile-menu-btn {
+    /* Hamburger butonunu göster - TÜM ESKİ KURALLARI EZ */
+    .navbar .mobile-menu-btn {
         display: flex !important;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        font-size: 1.8rem;
-        cursor: pointer;
-        color: var(--primary-color);
-        margin-left: auto;
-        z-index: 1001;
-        background: transparent;
-        border: none;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.8rem !important;
+        cursor: pointer !important;
+        color: var(--primary-color) !important;
+        margin-left: auto !important;
+        z-index: 1001 !important;
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
     }
     
-    /* Menü linklerini başlangıçta gizle (ekran dışı) */
-    .nav-links {
+    /* Menü linklerini başlangıçta gizle (ekran dışı) - TÜM ESKİ KURALLARI EZ */
+    .navbar .nav-links {
         position: fixed !important;
         top: 70px !important;
         left: 0 !important;
         right: 0 !important;
         width: 100% !important;
+        max-width: 100% !important;
         height: calc(100vh - 70px) !important;
         background: #ffffff !important;
         display: flex !important;
@@ -2423,26 +2425,31 @@ blockquote {
         margin: 0 !important;
         list-style: none !important;
         transform: translateX(100%) !important;
+        -webkit-transform: translateX(100%) !important;
         transition: transform 0.3s ease-in-out !important;
+        -webkit-transition: transform 0.3s ease-in-out !important;
         z-index: 1000 !important;
         box-shadow: -2px 0 10px rgba(0,0,0,0.1) !important;
         overflow-y: auto !important;
+        gap: 0 !important;
     }
     
     /* Menü açık olduğunda (JS ile eklenen sınıf) */
-    .nav-links.mobile-menu-open {
+    .navbar .nav-links.mobile-menu-open {
         transform: translateX(0) !important;
+        -webkit-transform: translateX(0) !important;
     }
     
     /* Menü linkleri */
-    .nav-links li {
+    .navbar .nav-links li {
         width: 100% !important;
-        margin: 10px 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
         text-align: center !important;
         list-style: none !important;
     }
     
-    .nav-links li a {
+    .navbar .nav-links li a {
         display: block !important;
         padding: 15px 20px !important;
         font-size: 1.1rem !important;
@@ -2451,18 +2458,17 @@ blockquote {
         text-decoration: none !important;
         border-bottom: 1px solid #eee !important;
         transition: all 0.3s ease !important;
+        width: 100% !important;
     }
     
-    .nav-links li a:hover,
-    .nav-links li a.active {
+    .navbar .nav-links li a:hover,
+    .navbar .nav-links li a.active {
         color: var(--secondary-color) !important;
         background: #f9f9f9 !important;
     }
     
-    /* Masaüstünde görünen linkleri gizle */
-    @media (min-width: 769px) {
-        .mobile-menu-btn {
-            display: none !important;
-        }
+    .navbar .nav-links li a::after {
+        display: none !important;
+        content: none !important;
     }
 }

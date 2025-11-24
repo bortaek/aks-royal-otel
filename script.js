@@ -76,53 +76,54 @@ try {
     console.log("Fancybox yüklenmedi veya gerekmedi.");
 }
 
-// --- MOBİL MENÜ ÇALIŞTIRMA (BASİT VE GARANTİLİ) ---
-(function() {
-    'use strict';
+// --- MOBİL MENÜ - EN BASİT VE GARANTİLİ ÇÖZÜM ---
+console.log('Script.js yüklendi');
+
+// Sayfa yüklendiğinde çalıştır
+window.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM yüklendi, mobil menü başlatılıyor...');
     
-    function initMobileMenu() {
-        const menuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
+    var menuBtn = document.querySelector('.mobile-menu-btn');
+    var navLinks = document.querySelector('.nav-links');
+    
+    console.log('MenuBtn bulundu:', !!menuBtn);
+    console.log('NavLinks bulundu:', !!navLinks);
+    
+    if (!menuBtn) {
+        console.error('HATA: .mobile-menu-btn bulunamadı!');
+        return;
+    }
+    
+    if (!navLinks) {
+        console.error('HATA: .nav-links bulunamadı!');
+        return;
+    }
+    
+    var menuIcon = menuBtn.querySelector('i');
+    console.log('MenuIcon bulundu:', !!menuIcon);
+    
+    // Butona tıklama eventi
+    menuBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
         
-        if (!menuBtn || !navLinks) {
-            console.warn('Mobil menü elementleri bulunamadı');
-            return;
-        }
+        console.log('BUTONA TIKLANDI!');
         
-        const menuIcon = menuBtn.querySelector('i');
-        
-        menuBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            console.log('Butona tıklandı!');
-            
-            // Menüyü aç/kapat
-            navLinks.classList.toggle('mobile-menu-open');
-            
-            // İkonu değiştir
-            if (navLinks.classList.contains('mobile-menu-open')) {
-                if (menuIcon) {
-                    menuIcon.classList.remove('fa-bars');
-                    menuIcon.classList.add('fa-times');
-                }
-                console.log('Menü AÇILDI');
-            } else {
-                if (menuIcon) {
-                    menuIcon.classList.remove('fa-times');
-                    menuIcon.classList.add('fa-bars');
-                }
-                console.log('Menü KAPANDI');
+        // Menüyü aç/kapat
+        if (navLinks.classList.contains('mobile-menu-open')) {
+            navLinks.classList.remove('mobile-menu-open');
+            console.log('Menü KAPANDI');
+            if (menuIcon) {
+                menuIcon.className = 'fas fa-bars';
             }
-        });
-        
-        console.log('Mobil menü hazır!');
-    }
+        } else {
+            navLinks.classList.add('mobile-menu-open');
+            console.log('Menü AÇILDI');
+            if (menuIcon) {
+                menuIcon.className = 'fas fa-times';
+            }
+        }
+    };
     
-    // Sayfa yüklendiğinde çalıştır
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMobileMenu);
-    } else {
-        initMobileMenu();
-    }
-})();
+    console.log('Mobil menü başarıyla kuruldu!');
+});
