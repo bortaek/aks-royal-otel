@@ -1875,11 +1875,8 @@ ul { list-style: none; }
         height: 45px; /* Mobilde logo daha küçük olsun */
     }
     
-    /* Mobilde linkleri gizle (Hamburger menüye girecekler) */
-    .nav-links {
-        display: none; 
-        /* Not: Javascript ile açılır menü yapıldığında burası değişecek */
-    }
+    /* Mobilde linkleri gizle (Hamburger menüye girecekler) - YENİ KOD ALTTA */
+    /* .nav-links { display: none; } - ESKİ KOD SİLİNDİ, YENİ KOD ALTTA */
 
     /* Mobil Menü Butonu (Hamburger İkonu) */
     .mobile-menu-btn {
@@ -2414,23 +2411,26 @@ blockquote {
         cursor: pointer;
         color: var(--primary-color);
         margin-left: auto; /* Sağa yasla */
+        z-index: 1001;
     }
 
     /* 2. Menü Linklerini Normalde Gizle (Ekran Dışına At) */
     .nav-links {
-        position: fixed;
-        top: 90px; /* Navbar yüksekliği kadar aşağıdan başla */
-        right: -100%; /* Ekranın tamamen sağında gizli dursun */
-        width: 100%;
-        height: calc(100vh - 90px);
-        background-color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding-top: 50px;
-        transition: right 0.4s ease-in-out; /* Kayma efekti */
-        z-index: 998;
-        box-shadow: -5px 10px 15px rgba(0,0,0,0.1);
+        position: fixed !important;
+        top: 70px !important; /* Navbar yüksekliği kadar aşağıdan başla */
+        right: -100% !important; /* Ekranın tamamen sağında gizli dursun */
+        width: 100% !important;
+        height: calc(100vh - 70px) !important;
+        background-color: #ffffff !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding-top: 50px !important;
+        transition: right 0.4s ease-in-out !important; /* Kayma efekti */
+        z-index: 999 !important;
+        box-shadow: -5px 10px 15px rgba(0,0,0,0.1) !important;
+        margin: 0 !important;
+        list-style: none !important;
     }
 
     /* 3. JS ile 'active' sınıfı eklenince Ekrana Getir */
@@ -2440,15 +2440,21 @@ blockquote {
 
     /* Linklerin Görünümü */
     .nav-links li {
-        margin: 20px 0;
-        width: 100%;
-        text-align: center;
+        margin: 20px 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+        list-style: none !important;
     }
 
     .nav-links li a {
-        font-size: 1.2rem;
-        display: block;
-        padding: 10px;
-        color: #333;
+        font-size: 1.2rem !important;
+        display: block !important;
+        padding: 15px !important;
+        color: #333 !important;
+        text-decoration: none !important;
+    }
+    
+    .nav-links li a:hover {
+        color: var(--secondary-color) !important;
     }
 }

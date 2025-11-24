@@ -81,10 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    const menuIcon = document.querySelector('.mobile-menu-btn i');
+    const menuIcon = menuBtn ? menuBtn.querySelector('i') : null;
 
-    if (menuBtn) {
-        menuBtn.addEventListener('click', () => {
+    // Tüm elementlerin varlığını kontrol et
+    if (menuBtn && navLinks && menuIcon) {
+        menuBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
             // 1. Menüyü aç/kapat
             navLinks.classList.toggle('active');
             
@@ -99,7 +103,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("Menü KAPANDI"); // Test için
             }
         });
+        
+        // Menü dışına tıklanınca kapat
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active')) {
+                if (!menuBtn.contains(e.target) && !navLinks.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            }
+        });
     } else {
-        console.error("HATA: Mobil menü butonu HTML'de bulunamadı!");
+        console.error("HATA: Mobil menü elementleri bulunamadı!", {
+            menuBtn: !!menuBtn,
+            navLinks: !!navLinks,
+            menuIcon: !!menuIcon
+        });
     }
 });
