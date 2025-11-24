@@ -2195,3 +2195,61 @@ blockquote {
     padding: 16px 35px !important; /* İç boşluğu yeniden tanımla */
     height: auto !important; /* Sabit yükseklik varsa iptal et */
 }
+
+/* --- WHATSAPP BUTONU KESİN DÜZELTME --- */
+
+/* 1. Yüzen Buton Alanını Sabitle */
+.fixed-cta-buttons .whatsapp-btn,
+.floating-buttons .whatsapp-btn,
+.float-btn.whatsapp {
+    width: 60px !important;  /* Genişlik zorla 60px olsun */
+    height: 60px !important; /* Yükseklik zorla 60px olsun */
+    font-size: 32px !important; /* İkon boyutu */
+    
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    
+    border-radius: 50% !important; /* Tam yuvarlak */
+    background-color: #25D366 !important; /* WhatsApp Yeşili */
+    color: white !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    
+    /* Varsa padding sıfırlama */
+    padding: 0 !important; 
+    line-height: 1 !important;
+}
+
+/* 2. İçindeki İkonu Ortala */
+.fixed-cta-buttons .whatsapp-btn i,
+.floating-buttons .whatsapp-btn i {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    line-height: 1 !important;
+}
+
+/* 3. Hover (Üzerine Gelince) Efekti */
+.fixed-cta-buttons .whatsapp-btn:hover,
+.floating-buttons .whatsapp-btn:hover {
+    transform: scale(1.1) !important; /* Hafif büyüme */
+}
+
+/* --- HERO RESMİNİ UZAKLAŞTIRMA AYARI --- */
+.hero {
+    /* Eskiden 100vh (Tam ekran) idi, şimdi %80'e düşürdük */
+    height: 80vh !important; 
+    min-height: 600px; /* Çok küçülmesin diye alt sınır */
+    
+    /* Resmin odak noktasını ortala */
+    background-position: center center !important;
+    background-size: cover !important;
+}
+
+/* Mobilde resim çok yakınlaşır, onu engellemek için mobilde yüksekliği daha da kısalım */
+@media (max-width: 768px) {
+    .hero {
+        height: 60vh !important; /* Mobilde ekranın %60'ı kadar olsun */
+        min-height: 400px;
+    }
+}
