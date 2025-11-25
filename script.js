@@ -127,3 +127,62 @@ window.addEventListener('DOMContentLoaded', function() {
     
     console.log('Mobil menü başarıyla kuruldu!');
 });
+
+// --- BLOG SSS (Sıkça Sorulan Sorular) ACCORDION ---
+(function() {
+    function initFAQ() {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        if (faqQuestions.length === 0) {
+            return; // FAQ yoksa çık
+        }
+        
+        console.log('FAQ bulundu:', faqQuestions.length, 'soru');
+        
+        faqQuestions.forEach(function(question) {
+            // Önceki event listener'ı kaldır (varsa)
+            const newQuestion = question.cloneNode(true);
+            question.parentNode.replaceChild(newQuestion, question);
+            
+            newQuestion.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const faqItem = this.closest('.faq-item');
+                if (!faqItem) {
+                    console.error('FAQ item bulunamadı!');
+                    return;
+                }
+                
+                const isActive = faqItem.classList.contains('active');
+                
+                console.log('FAQ tıklandı, aktif mi?', isActive);
+                
+                // Tüm FAQ itemlerini kapat
+                document.querySelectorAll('.faq-item').forEach(function(item) {
+                    item.classList.remove('active');
+                });
+                
+                // Eğer tıklanan item zaten aktif değilse, onu aç
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                    console.log('FAQ açıldı');
+                } else {
+                    console.log('FAQ zaten açıktı, kapatıldı');
+                }
+            });
+        });
+        
+        console.log('FAQ accordion başarıyla kuruldu!');
+    }
+    
+    // Sayfa yüklendiğinde çalıştır
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFAQ);
+    } else {
+        initFAQ();
+    }
+    
+    // Geç yüklenen içerikler için tekrar dene
+    setTimeout(initFAQ, 500);
+})();

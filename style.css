@@ -1168,9 +1168,28 @@ h3.sub-heading {
     margin-top: 20px;
 }
 
+/* Services Grid içindeki kartlar için özel ortalama */
+.services-grid .service-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: center !important;
+}
+
+.services-grid .service-card .icon-box {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 25px !important;
+}
+
 .service-card {
     padding: 40px 30px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Hizmet İkonları */
@@ -1179,7 +1198,7 @@ h3.sub-heading {
     color: var(--primary-color);
     width: 90px; height: 90px;
     border-radius: 50%;
-    margin-bottom: 25px;
+    margin: 0 auto 25px auto; /* Ortalama için auto margin */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2478,5 +2497,166 @@ blockquote {
     .navbar .nav-links li a::after {
         display: none !important;
         content: none !important;
+    }
+}
+
+/* --- HİZMET İKONLARINI ORTALAMA DÜZELTMESİ (KESİN ÇÖZÜM) --- */
+.services-grid .service-card {
+    text-align: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 40px 30px !important;
+}
+
+.services-grid .service-card .icon-box {
+    margin: 0 auto 25px auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 25px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 90px !important;
+    height: 90px !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+}
+
+.services-grid .service-card h3,
+.services-grid .service-card p {
+    width: 100% !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Tüm service-card içindeki icon-box için genel kural - EN GÜÇLÜ ÇÖZÜM */
+.service-card .icon-box,
+.services-grid .service-card .icon-box,
+div.service-card .icon-box,
+div.services-grid .service-card .icon-box {
+    margin: 0 auto 25px auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 25px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 90px !important;
+    height: 90px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Service card'ın kendisi için de flex yapısı */
+.service-card,
+.services-grid .service-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+/* --- BLOG SSS (Sıkça Sorulan Sorular) BÖLÜMÜ --- */
+.blog-faq-section {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 2px solid #eee;
+}
+
+.blog-faq-section h3 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.faq-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.faq-item {
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+}
+
+.faq-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: var(--secondary-color);
+}
+
+.faq-question {
+    padding: 20px 25px;
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    cursor: pointer !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.faq-question:hover {
+    color: var(--secondary-color);
+}
+
+.faq-question i {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-answer {
+    padding: 0 25px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+    color: #555;
+    line-height: 1.7;
+    opacity: 0;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 1000px;
+    padding: 0 25px 20px 25px;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .blog-faq-section h3 {
+        font-size: 1.6rem;
+    }
+    
+    .faq-question {
+        padding: 15px 20px;
+        font-size: 1rem;
+    }
+    
+    .faq-answer {
+        padding: 0 20px;
+    }
+    
+    .faq-item.active .faq-answer {
+        padding: 0 20px 15px 20px;
     }
 }
